@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Mapping\**" />
+    <Compile Remove="MathHelper\**" />
+    <Compile Remove="old\**" />
+    <Compile Remove="Posts\**" />
+    <EmbeddedResource Remove="Mapping\**" />
+    <EmbeddedResource Remove="MathHelper\**" />
+    <EmbeddedResource Remove="old\**" />
+    <EmbeddedResource Remove="Posts\**" />
+    <None Remove="Mapping\**" />
+    <None Remove="MathHelper\**" />
+    <None Remove="old\**" />
+    <None Remove="Posts\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="BasicJudge.cs" />
+    <Compile Remove="DialogContext.cs" />
+    <Compile Remove="FinalJudge.cs" />
+    <Compile Remove="Gossiper.cs" />
+    <Compile Remove="Main.cs" />
+    <Compile Remove="MyDialog.cs" />
+    <Compile Remove="MyImageCreator.cs" />
+    <Compile Remove="Python.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="IronPython" Version="2.7.9" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
+  </ItemGroup>
+
+</Project>

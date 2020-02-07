@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.168
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dotnet_core_practice", "dotnet_core_practice\dotnet_core_practice.csproj", "{5615E156-4A64-4613-A41F-28D0B1379E8F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "message_handler", "message_handler\message_handler.csproj", "{50189CEC-8419-45AC-A4D9-9E084C98745B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5615E156-4A64-4613-A41F-28D0B1379E8F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5615E156-4A64-4613-A41F-28D0B1379E8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5615E156-4A64-4613-A41F-28D0B1379E8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5615E156-4A64-4613-A41F-28D0B1379E8F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50189CEC-8419-45AC-A4D9-9E084C98745B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50189CEC-8419-45AC-A4D9-9E084C98745B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50189CEC-8419-45AC-A4D9-9E084C98745B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50189CEC-8419-45AC-A4D9-9E084C98745B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8F1F7935-C823-4B3C-900F-8426CFE8CA91}
+	EndGlobalSection
+EndGlobal
