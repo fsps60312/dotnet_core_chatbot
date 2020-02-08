@@ -121,12 +121,23 @@ namespace message_handler
         static DialogNode ReadDialogNode()
         {
             if (!File.Exists(sender_psid + "_dialog_content.txt")) return new DialogEntry();
-            Stream stream = new FileStream(sender_psid + "_dialog_content.txt", FileMode.Open, FileAccess.Read, FileShare.Read);
-            IFormatter formatter = new BinaryFormatter();
-            var dialog_content = (DialogNode)formatter.Deserialize(stream);
-            stream.Close();
-            File.Delete(sender_psid + "_dialog_content.txt");
-            return dialog_content;
+            try
+            {
+                Stream stream = new FileStream(sender_psid + "_dialog_content.txt", FileMode.Open, FileAccess.Read, FileShare.Read);
+                IFormatter formatter = new BinaryFormatter();
+                var dialog_content = (DialogNode)formatter.Deserialize(stream);
+                stream.Close();
+                return dialog_content;
+            }
+            catch(Exception)
+            {
+                SendMsg("ReadDialogNode failed.");
+                return new DialogEntry();
+            }
+            finally
+            {
+                File.Delete(sender_psid + "_dialog_content.txt");
+            }
         }
         public static void WriteDialogNode(DialogNode dialog)
         {

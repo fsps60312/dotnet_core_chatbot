@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 namespace message_handler.Posts
 {
+    [Serializable]
     class P2003744179895844
     {
         public async Task Stage1(IDialogContext context, IAwaitable<IMessageActivity> argument)
