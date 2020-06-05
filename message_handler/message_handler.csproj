@@ -28,7 +28,6 @@
     <Compile Remove="Main.cs" />
     <Compile Remove="MyDialog.cs" />
     <Compile Remove="MyImageCreator.cs" />
-    <Compile Remove="Python.cs" />
   </ItemGroup>
 
   <ItemGroup>

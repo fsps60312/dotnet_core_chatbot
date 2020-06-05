@@ -50,6 +50,7 @@
         }
         private static string GetPostId(string url)
         {
+            if (url.IndexOf('?') != -1) url = url.Remove(url.IndexOf('?'));
             const string pcPre = "https://www.facebook.com/CodingSimplifyLife/posts/";
             if (url.StartsWith(pcPre)) return url.Substring(pcPre.Length);
             const string

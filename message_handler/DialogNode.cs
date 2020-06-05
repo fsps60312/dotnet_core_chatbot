@@ -32,9 +32,10 @@ namespace message_handler
                 SendMsg("吼～都這樣，不說點話嗎？><");
                 EndDialog(this);
             }
-            if (sender_msg.Length > 250)
+            if (sender_msg.Length > 1000)
             {
                 SendMsg("???");
+                SendMsg($"傳了{sender_msg.Length}個字是在哈囉???");
                 EndDialog(this);
             }
         }

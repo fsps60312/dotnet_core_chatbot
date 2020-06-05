@@ -1,39 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.IO;
-using System.Security;
-using System.Security.Policy;
-using System.Security.Permissions;
-using System.Reflection;
-using System.Runtime.Remoting;
-using Newtonsoft.Json;
-using IronPython;
-using IronPython.Hosting;
-using System.Threading.Tasks;
-using System.Threading;
 using System.Diagnostics;
 
 namespace message_handler
 {
-    class Python:DialogNode
+    class BC:DialogNode
     {
         public override void Run()
         {
-            string python_code = null;
-            if (sender_msg.StartsWith("幫我算")) python_code = sender_msg.Substring(3).TrimStart();
-            else if (sender_msg.StartsWith("幫算")) python_code = sender_msg.Substring(2).TrimStart();
-            else if (sender_msg.ToLower().StartsWith("py")) python_code = sender_msg.Substring(2).TrimStart();
-            else if (sender_msg.ToLower().StartsWith("python")) python_code = sender_msg.Substring(6).TrimStart();
-            if (!string.IsNullOrWhiteSpace(python_code))
+            if (sender_msg.ToLower().StartsWith("bc"))
             {
                 var process = new Process()
                 {
                     StartInfo = new ProcessStartInfo
                     {
                         FileName = "/bin/su",
-                        Arguments = "- test -c python3",
+                        Arguments = "- test -c bc",
                         RedirectStandardInput = true,
                         RedirectStandardOutput = true,
                         RedirectStandardError = true,
@@ -42,7 +25,7 @@ namespace message_handler
                     }
                 };
                 process.Start();
-                process.StandardInput.WriteLine(python_code);
+                process.StandardInput.WriteLine(sender_msg.Substring(3));
                 process.StandardInput.Close();
                 DateTime start_time = DateTime.Now;
                 while (true)
