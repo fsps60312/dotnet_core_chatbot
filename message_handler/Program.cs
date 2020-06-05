@@ -54,6 +54,12 @@ namespace message_handler
         }
         public static void SendMsg(string msg)
         {
+            const int msg_max_len = 2000;
+            if(msg.Length> msg_max_len)
+            {
+                SendMsg($"Oops... 我最多只能傳送前面{msg_max_len}個字給你哦><\n原本是{msg.Length}個字！");
+                msg = msg.Remove(msg_max_len);
+            }
             string response = JsonConvert.SerializeObject(new { text = msg });
             Send(response);
         }
@@ -115,7 +121,14 @@ namespace message_handler
             var request = new HttpRequestMessage(HttpMethod.Post, "https://graph.facebook.com/v6.0/me/messages?access_token="+ page_access_token);
             request.Content = content;
             var result = http_client.SendAsync(request).Result;
-            if (!result.IsSuccessStatusCode) Console.WriteLine("failed to send: " + result.ReasonPhrase + "\n" + response);
+            if (!result.IsSuccessStatusCode)
+            {
+                Console.WriteLine("failed to send: " + result.ReasonPhrase);
+                Console.WriteLine(string.Join(',',result.Headers.Select(v=>v.Key)));
+                Console.WriteLine(result.Content.ReadAsStringAsync().Result);
+                Console.WriteLine(response);
+
+            }
             else Console.WriteLine("success");
         }
         static DialogNode ReadDialogNode()

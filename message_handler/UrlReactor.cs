@@ -1,4 +1,5 @@
-﻿namespace message_handler
+﻿using System.Collections.Generic;
+namespace message_handler
 {
     class UrlReactor:DialogNode
     {
@@ -41,6 +42,9 @@
                             case "2003744179895844":
                                 new P2003744179895844().Run();
                                 return;
+                            case "2652267661710156":
+                                new P2652267661710156().Run();
+                                return;
                             default:
                                 Program.SendMsg("Oops......這篇文沒有彩蛋哦～試試看別篇吧XD");
                                 EndDialog(new DialogEntry()); return;
@@ -50,13 +54,25 @@
         }
         private static string GetPostId(string url)
         {
-            if (url.IndexOf('?') != -1) url = url.Remove(url.IndexOf('?'));
+            Dictionary<string, string> args = new Dictionary<string, string>();
+            if (url.IndexOf('?') != -1)
+            {
+                foreach(string arg in url.Substring(url.IndexOf('?') + 1).Split('&'))
+                {
+                    int i = arg.IndexOf('=');
+                    if (i != -1)
+                    {
+                        args[arg.Remove(i)] = arg.Substring(i + 1);
+                    }
+                }
+                url = url.Remove(url.IndexOf('?'));
+            }
             const string pcPre = "https://www.facebook.com/CodingSimplifyLife/posts/";
             if (url.StartsWith(pcPre)) return url.Substring(pcPre.Length);
-            const string
-                phonePre = "https://m.facebook.com/story.php?story_fbid=",
-                phoneSuf = "&id=1848324468771150";
-            if (url.StartsWith(phonePre) && url.EndsWith(phoneSuf)) return url.Substring(phonePre.Length, url.Length - phonePre.Length - phoneSuf.Length);
+            if (url == "https://m.facebook.com/story.php" && args.ContainsKey("story_fbid") && args.ContainsKey("id") && args["id"] == "1848324468771150")
+            {
+                return args["story_fbid"];
+            }
             return null;
         }
     }
