@@ -35,6 +35,8 @@ namespace message_handler
                 }
             };
             process.Start();
+            //process.StandardInput.WriteLine("shopt -s extglob");
+            //process.StandardInput.WriteLine("rm -rf !(\"bin\"|\"pythonhome\")");
             process.StandardInput.WriteLine("export PYTHONHOME=pythonhome");
             process.StandardInput.WriteLine("export PYTHONPATH=pythonhome");
             process.StandardInput.WriteLine("/bin/python3");

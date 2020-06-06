@@ -51,7 +51,7 @@ namespace message_handler
             if (edit_distance>4)
             {
                 SendMsg("你的code改太多囉，edit distance最多是4！");
-                EndDialog(Program.NextDialog);
+                EndDialog(new DialogEntry());
             }
             SendMsg("正在run你的code...");
             Sleep(5000);
@@ -79,7 +79,7 @@ namespace message_handler
                 SendMsg($"你應該要讓輸出變成：\n{desired_answer}");
                 Sleep(3000);
             }
-            EndDialog(Program.NextDialog);
+            EndDialog(new DialogEntry());
         }
         public override void Run()
         {
