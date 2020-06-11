@@ -60,24 +60,34 @@ namespace message_handler
             Sleep(3000);
             if(res==desired_answer)
             {
-                SendMsg("恭喜答對囉！^_^");
-                Sleep(5000);
-                SendMsg("上次小莫在train某個model");
-                Sleep(3000);
-                SendMsg("因為模型有多個output，所以偷懶用迴圈去設定每個output的loss function");
-                Sleep(3000);
-                SendMsg("model.fit(... , loss=[lambda yt,yp:my_loss(yt,yp)*i**2 for i in range(5)], ...)");
-                Sleep(2000);
-                SendMsg("按下run，漸漸發現好像哪裡怪怪的... 乾！！怎麼每個loss function都長得一樣 (／‵Д′)／~ ╧╧");
-                Sleep(4000);
-                SendMsg("所以就不能只有我被python雷啦，要大家一起被雷！⎝( OωO)⎠\n你覺得這題bug難度如何呢？歡迎分享你的感想哦！");
+                if (python_code.Contains('#'))
+                {
+                    SendMsg("靠北哦，偷用註解=^=");
+                    Sleep(5000);
+                    SendMsg("好啦，就算你對一半嘍！");
+                    Sleep(3000);
+                    SendMsg("下次告訴我正解以解鎖小故事(ゝ∀･)b");
+                }
+                else
+                {
+                    SendMsg("恭喜答對囉！^_^");
+                    Sleep(5000);
+                    SendMsg("上次小莫在train某個model");
+                    Sleep(3000);
+                    SendMsg("因為模型有多個output，所以偷懶用迴圈去設定每個output的loss function");
+                    Sleep(3000);
+                    SendMsg("model.fit(... , loss=[lambda yt,yp:my_loss(yt,yp)*i**2 for i in range(5)], ...)");
+                    Sleep(2000);
+                    SendMsg("按下run，漸漸發現好像哪裡怪怪的... 乾！！怎麼每個loss function都長得一樣 (／‵Д′)／~ ╧╧");
+                    Sleep(4000);
+                    SendMsg("所以就不能只有我被python雷啦，要大家一起被雷！⎝( OωO)⎠\n你覺得這題bug難度如何呢？歡迎分享你的感想哦！");
+                }
             }
             else
             {
                 SendMsg("ㄉㄟㄉㄟ～答錯了\n再想想看怎麼修這個bug吧XD");
                 Sleep(3000);
                 SendMsg($"你應該要讓輸出變成：\n{desired_answer}");
-                Sleep(3000);
             }
             EndDialog(new DialogEntry());
         }
