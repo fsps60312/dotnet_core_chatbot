@@ -14,7 +14,7 @@ namespace message_handler
                 StartInfo = new ProcessStartInfo
                 {
                     FileName = "/bin/ssh",
-                    Arguments = "restricted@localhost -p 60313",
+                    Arguments = "restricted@localhost -p 60313 -- bash",
                     RedirectStandardInput = true,
                     RedirectStandardOutput = true,
                     RedirectStandardError = true,
