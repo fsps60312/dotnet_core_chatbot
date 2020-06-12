@@ -48,7 +48,7 @@ namespace message_handler
             {
                 string res = RunCommand(sender_msg.Substring(4).Trim());
                 SendMsg(res);
-                res = RunCommand("killall -9 -u restricted");
+                //res = RunCommand("killall -9 -u restricted");
                 //Console.WriteLine(res);
                 EndDialog(Program.NextDialog);
             }
