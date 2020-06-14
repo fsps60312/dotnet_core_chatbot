@@ -48,7 +48,7 @@ namespace message_handler
             {
                 (new[]{"bash", "sh"},"bash"),
                 (new[]{"幫我算", "幫算", "python", "py"},"python3"),
-                (new[]{"bc"},"bc")
+                (new[]{"bc"},"\"export BC_LINE_LENGTH=0 && bc -l\"")
             })
             {
                 string input = null;
