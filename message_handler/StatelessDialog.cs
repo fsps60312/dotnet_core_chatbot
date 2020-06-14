@@ -12,6 +12,18 @@ namespace message_handler
             string minimized = Minimize(sender_msg);
             var candidates = gossip_data.Where(p => minimized == Minimize(p.Item1)).ToArray();
             if (candidates.Length != 0) { SendMsg(RandItem(candidates).Item2); EndDialog(Program.NextDialog); }
+            if (sender_msg.Trim().Split('\n').Last().Trim() == "選一個")
+            {
+                var opts = sender_msg.Trim().Split('\n').ToList();
+                opts.RemoveAt(opts.Count - 1);
+                if (opts.Count == 0) SendMsg("選項呢？");
+                else
+                {
+                    SendMsg("我選：");
+                    SendMsg(RandItem(opts));
+                }
+                EndDialog(Program.NextDialog);
+            }
             if (sender_msg.Trim().StartsWith("說") && sender_msg.Length > 1) { SendMsg(sender_msg.Trim().Substring(1)); EndDialog(Program.NextDialog); }
             if (sender_msg.Trim().All(c => c == '.')) { SendMsg(Bash.Cmd("bash", "fortune $(fortune -f 2>&1 | tail +2 | sed 's/^[ 0-9.]*% //g' | grep -v 'chinese\\|tang300\\|song100') | sed 's/\\x1b\\[[0-9;]*m//g'")); EndDialog(Program.NextDialog); }
             if (sender_msg.Trim().All(c => c == '…')) { SendMsg(Bash.Cmd("bash", "fortune-zh | opencc | sed 's/\\x1b\\[[0-9;]*m//g'")); EndDialog(Program.NextDialog); }
