@@ -96,7 +96,7 @@ namespace message_handler
                 string msg = sender_msg;
                 if (ganTalkLeaderBoard == null) ganTalkLeaderBoard = new GanTalkLeaderBoard();
                 ganTalkLeaderBoard.Update(Program.SenderPsid, msg);
-                switch (RandInt(0, 5))
+                switch (RandInt(0, 6))
                 {
                     case 0: break;
                     case 1: msg = "你說了「" + msg + "」"; break;
@@ -104,6 +104,8 @@ namespace message_handler
                     case 3: msg = msg + " XDD"; break;
                     case 4: msg = msg + " www"; break;
                     case 5: msg = msg + " ^_^"; break;
+                    case 6: msg = Bash.Cmd("cowsay", msg); break;
+                    default:throw new Exception();
                 }
                 SendMsg(msg);
             }

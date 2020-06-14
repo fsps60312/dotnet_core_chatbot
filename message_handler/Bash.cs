@@ -47,8 +47,9 @@ namespace message_handler
             foreach (var (prefixes, cmd) in new[]
             {
                 (new[]{"bash", "sh"},"bash"),
-                (new[]{"幫我算", "幫算", "python", "py"},"python3"),
-                (new[]{"bc"},"\"export BC_LINE_LENGTH=0 && bc -l\"")
+                (new[]{"python", "py"},"python3"),
+                (new[]{"幫我算", "幫算", "bc"},"\"export BC_LINE_LENGTH=0 && bc -l\""),
+                (new[]{"factor"},"factor")
             })
             {
                 string input = null;

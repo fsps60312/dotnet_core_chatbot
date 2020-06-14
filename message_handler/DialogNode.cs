@@ -18,7 +18,7 @@ namespace message_handler
         protected void EndDialog(DialogNode dialog_node) { Program.WriteDialogNode(dialog_node); Environment.Exit(0); }
         protected void Sleep(int miliseconds) { System.Threading.Thread.Sleep(miliseconds); }
         protected void Bug(string msg) { SendMsg("error:\n" + msg);EndDialog(new DialogEntry()); }
-        bool IsChinese(char c) { return 0x4E00 <= c && c <= 0x9FFF; }
+        protected bool IsChinese(char c) { return 0x4E00 <= c && c <= 0x9FFF; }
         protected string Minimize(string s)
         {
             s = new string(s.Where(c => char.IsLetterOrDigit(c) || IsChinese(c)).ToArray()).ToLower();
