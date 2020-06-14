@@ -5,16 +5,16 @@ using System.Diagnostics;
 
 namespace message_handler
 {
-    class Bash:DialogNode
+    class Bash : DialogNode
     {
-        public static string RunCommand(string command)
+        public static string Cmd(string cmd, string input)
         {
             var process = new Process()
             {
                 StartInfo = new ProcessStartInfo
                 {
                     FileName = "/bin/ssh",
-                    Arguments = "restricted@localhost -p 60313 -- bash",
+                    Arguments = "restricted@localhost -p 60313 -- " + cmd,
                     RedirectStandardInput = true,
                     RedirectStandardOutput = true,
                     RedirectStandardError = true,
@@ -23,7 +23,7 @@ namespace message_handler
                 }
             };
             process.Start();
-            process.StandardInput.WriteLine(command);
+            process.StandardInput.WriteLine(input);
             process.StandardInput.Close();
             DateTime start_time = DateTime.Now;
             while (true)
@@ -44,13 +44,28 @@ namespace message_handler
         }
         public override void Run()
         {
-            if (sender_msg.ToLower().StartsWith("bash"))
+            foreach (var (prefixes, cmd) in new[]
             {
-                string res = RunCommand(sender_msg.Substring(4).Trim());
-                SendMsg(res);
-                //res = RunCommand("killall -9 -u restricted");
-                //Console.WriteLine(res);
-                EndDialog(Program.NextDialog);
+                (new[]{"bash", "sh"},"bash"),
+                (new[]{"幫我算", "幫算", "python", "py"},"python3"),
+                (new[]{"bc"},"bc")
+            })
+            {
+                string input = null;
+                foreach (string prefix in prefixes)
+                {
+                    if (sender_msg.ToLower().StartsWith(prefix.ToLower()))
+                    {
+                        input = sender_msg.Substring(prefix.Length).Trim();
+                        break;
+                    }
+                }
+                if (input != null)
+                {
+                    string res = Cmd(cmd, input);
+                    SendMsg(res);
+                    EndDialog(Program.NextDialog);
+                }
             }
         }
     }

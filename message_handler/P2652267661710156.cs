@@ -55,7 +55,7 @@ namespace message_handler
             }
             SendMsg("正在run你的code...");
             Sleep(5000);
-            string res = Python.RunCode(python_code);
+            string res = Bash.Cmd("python3", python_code);
             SendMsg($"結果：\n{res}");
             Sleep(3000);
             if(res==desired_answer)
