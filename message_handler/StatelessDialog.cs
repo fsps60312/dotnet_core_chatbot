@@ -27,11 +27,12 @@ namespace message_handler
                 else
                 {
                     SendMsg("我選：");
+                    Sleep(1000);
                     SendMsg(RandItem(opts));
                 }
                 EndDialog(Program.NextDialog);
             }
-            if (sender_msg.Trim().StartsWith("說") && sender_msg.Length > 1) { SendMsg(sender_msg.Trim().Substring(1)); EndDialog(Program.NextDialog); }
+            if ((sender_msg.Trim().StartsWith("說") || sender_msg.Trim().StartsWith("講")) && sender_msg.Trim().Length > 1) { SendMsg(sender_msg.Trim().Substring(1)); EndDialog(Program.NextDialog); }
             if (sender_msg.Trim().All(c => c == '.')) { SendMsg(Bash.Cmd("bash", "fortune $(fortune -f 2>&1 | tail +2 | sed 's/^[ 0-9.]*% //g' | grep -v 'chinese\\|tang300\\|song100') | sed 's/\\x1b\\[[0-9;]*m//g'")); EndDialog(Program.NextDialog); }
             if (sender_msg.Trim().All(c => c == '…')) { SendMsg(Bash.Cmd("bash", "fortune-zh | opencc | sed 's/\\x1b\\[[0-9;]*m//g'")); EndDialog(Program.NextDialog); }
             if (new[] { "剪刀", "石頭", "布" }.Contains(sender_msg.Trim()))
@@ -39,12 +40,13 @@ namespace message_handler
                 var s = new List<string> { "剪刀", "石頭", "布" };
                 (int you, int me) = (s.IndexOf(sender_msg.Trim()), RandInt(0, 2));
                 SendMsg($"我出 {s[me]}");
-                switch((me - you + 3) % 3)
+                Sleep(500);
+                switch ((me - you + 3) % 3)
                 {
-                    case 0:SendMsg("布！");break;
-                    case 1:SendMsg("我贏了！");break;
-                    case 2:SendMsg("嗚嗚");break;
-                    default:throw new Exception();
+                    case 0: SendMsg("布！"); break;
+                    case 1: SendMsg("我贏了！"); break;
+                    case 2: SendMsg("嗚嗚"); break;
+                    default: throw new Exception();
                 }
                 EndDialog(Program.NextDialog);
             }
@@ -54,7 +56,6 @@ namespace message_handler
             ( "code風景區", "很棒的名字，不覺得嗎？XD\n然後，我的英文名字是「code scenic」哦，Google看看！\n總之，像欣賞風景一樣快樂的探索程式之美吧！"),
             //("Code風景區" ,"很棒的名字，不覺得嗎？XD\n然後，我的英文名字是「Code Scenic」哦，Google看看！\n總之，像欣賞風景一樣快樂的探索程式之美吧！"),
             ( "傳一則貼文的網址(?)","吼～不是真的要你說這句話啦！\n是你要傳一則貼文的網址給我～><" ),
-            ("說話","話" ),
             ("借我錢","我沒錢><" ),
             ("不要","好吧，你壞壞 :p" ),
             ("對","沒錯，就是這樣！😎" ),
