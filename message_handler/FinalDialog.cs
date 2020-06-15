@@ -92,7 +92,6 @@ namespace message_handler
             }
             else
             {
-                //await context.PostAsync("\u4f60\u8aaa\u4e86\u300c"/*你說了「*/ + message.Text + "\u300d"/*」*/);
                 string msg = sender_msg;
                 if (ganTalkLeaderBoard == null) ganTalkLeaderBoard = new GanTalkLeaderBoard();
                 ganTalkLeaderBoard.Update(Program.SenderPsid, msg);

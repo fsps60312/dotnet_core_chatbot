@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using Microsoft.Scripting.Utils;
 
 namespace message_handler
 {
@@ -27,6 +28,20 @@ namespace message_handler
             if (sender_msg.Trim().StartsWith("說") && sender_msg.Length > 1) { SendMsg(sender_msg.Trim().Substring(1)); EndDialog(Program.NextDialog); }
             if (sender_msg.Trim().All(c => c == '.')) { SendMsg(Bash.Cmd("bash", "fortune $(fortune -f 2>&1 | tail +2 | sed 's/^[ 0-9.]*% //g' | grep -v 'chinese\\|tang300\\|song100') | sed 's/\\x1b\\[[0-9;]*m//g'")); EndDialog(Program.NextDialog); }
             if (sender_msg.Trim().All(c => c == '…')) { SendMsg(Bash.Cmd("bash", "fortune-zh | opencc | sed 's/\\x1b\\[[0-9;]*m//g'")); EndDialog(Program.NextDialog); }
+            if (new[] { "剪刀", "石頭", "布" }.Contains(sender_msg.Trim()))
+            {
+                var s = new List<string> { "剪刀", "石頭", "布" };
+                (int you, int me) = (s.IndexOf(sender_msg.Trim()), RandInt(0, 2));
+                SendMsg($"我出 {s[me]}");
+                switch((me - you + 3) % 3)
+                {
+                    case 0:SendMsg("布！");break;
+                    case 1:SendMsg("我贏了！");break;
+                    case 2:SendMsg("嗚嗚");break;
+                    default:throw new Exception();
+                }
+                EndDialog(Program.NextDialog);
+            }
         }
         (string, string)[] gossip_data = new (string, string)[]//input must be lower case
         {
@@ -59,7 +74,8 @@ namespace message_handler
             ("不好說","真的不好說（咦？）" ),
             ("omg","喵(?)" ),
             ("這是自動回覆嗎","有可能是，也有可能不是(?)" ),
-            ("github","https://github.com/fsps60312/dotnet_core_chatbot/tree/master/message_handler")
+            ("github","https://github.com/fsps60312/dotnet_core_chatbot/tree/master/message_handler"),
+            ("猜拳","好啊來！剪刀～石頭～布！")
         };
     }
 }
