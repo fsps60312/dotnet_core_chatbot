@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace message_handler
 {
-    class StatelessDialog:DialogNode
+    class StatelessDialog : DialogNode
     {
         public override void Run()
         {
@@ -28,7 +28,7 @@ namespace message_handler
             if (sender_msg.Trim().All(c => c == '.')) { SendMsg(Bash.Cmd("bash", "fortune $(fortune -f 2>&1 | tail +2 | sed 's/^[ 0-9.]*% //g' | grep -v 'chinese\\|tang300\\|song100') | sed 's/\\x1b\\[[0-9;]*m//g'")); EndDialog(Program.NextDialog); }
             if (sender_msg.Trim().All(c => c == '…')) { SendMsg(Bash.Cmd("bash", "fortune-zh | opencc | sed 's/\\x1b\\[[0-9;]*m//g'")); EndDialog(Program.NextDialog); }
         }
-        (string,string)[] gossip_data = new (string,string)[]//input must be lower case
+        (string, string)[] gossip_data = new (string, string)[]//input must be lower case
         {
             ( "code風景區", "很棒的名字，不覺得嗎？XD\n然後，我的英文名字是「code scenic」哦，Google看看！\n總之，像欣賞風景一樣快樂的探索程式之美吧！"),
             //("Code風景區" ,"很棒的名字，不覺得嗎？XD\n然後，我的英文名字是「Code Scenic」哦，Google看看！\n總之，像欣賞風景一樣快樂的探索程式之美吧！"),
@@ -58,7 +58,8 @@ namespace message_handler
             ("好哦","\\(^o^)/（雖然不知道發生甚麼事XD）" ),
             ("不好說","真的不好說（咦？）" ),
             ("omg","喵(?)" ),
-            ("這是自動回覆嗎","有可能是，也有可能不是(?)" )
+            ("這是自動回覆嗎","有可能是，也有可能不是(?)" ),
+            ("github","https://github.com/fsps60312/dotnet_core_chatbot/tree/master/message_handler")
         };
     }
 }
