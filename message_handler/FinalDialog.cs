@@ -104,7 +104,7 @@ namespace message_handler
                     case 3: msg = msg + " XDD"; break;
                     case 4: msg = msg + " www"; break;
                     case 5: msg = msg + " ^_^"; break;
-                    case 6: msg = Bash.Cmd("cowsay", msg); break;
+                    case 6: msg = Bash.Cmd("\"cowsay -f $(shuf -n 1 <(cowsay -l | tail +2 | sed 's/ /\\n/g'))\"", msg); break;
                     default:throw new Exception();
                 }
                 SendMsg(msg);

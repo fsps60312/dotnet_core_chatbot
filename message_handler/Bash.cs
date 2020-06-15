@@ -49,7 +49,14 @@ namespace message_handler
                 (new[]{"bash", "sh"},"bash"),
                 (new[]{"python", "py"},"python3"),
                 (new[]{"幫我算", "幫算", "bc"},"\"export BC_LINE_LENGTH=0 && bc -l\""),
-                (new[]{"factor"},"factor")
+                (new[]{"factor"},"factor"),
+                (new[]{ "cowsay"},"\"cowsay -f $(shuf -n 1 <(cowsay -l | tail +2 | sed 's/ /\\n/g'))\""),
+                (new[]{ "tac"},"tac"),
+                (new[]{"figlet"},"figlet"),
+                (new[]{"toilet"},"toilet"),
+                (new[]{"rev"},"rev"),
+                (new[]{"moo"},"\"apt moo\""),
+                (new[]{"rig"},"rig")
             })
             {
                 string input = null;
