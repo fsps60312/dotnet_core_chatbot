@@ -1,5 +1,4 @@
-﻿using Microsoft.Scripting.Utils;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -64,7 +63,7 @@ namespace message_handler
             {
                 if (!is_valid(sender_msg))
                 {
-                    SendMsg($"請輸入4位數字，例如{gen()}");
+                    SendMsg($"請輸入4位不重複數字，例如{gen()}");
                     EndDialog(this);
                 }
                 num_guess++;
@@ -81,6 +80,8 @@ namespace message_handler
                     if (ts.Seconds > 0) play_time_describe += $"{ts.Seconds}秒";
                     Sleep(3000);
                     SendMsg($"你總共猜了{num_guess}次，耗時{play_time_describe}，趕快跟朋友炫耀吧！");
+                    Sleep(3000);
+                    SendButtons("意猶未盡？", "輸入幾A幾B再挑戰一次！", new[] { "幾A幾B" });
                     EndDialog(new DialogEntry());
                 }else
                 {
@@ -104,7 +105,7 @@ namespace message_handler
                 case Stage.Run:
                     if (sender_msg.Trim() != "幾A幾B") return;
                     answer = gen();
-                    SendButtons("請輸入4位數開始遊戲", "謎底是不重複的4位數", new[] { "規則", "範例", "退出" });
+                    SendButtons("請輸入4位數開始遊戲", $"謎底是不重複的4位數，例如{gen()}", new[] { "規則", "範例", "退出" });
                     stage = Stage.Stage1;
                     break;
                 case Stage.Stage1: Stage1(); break;
