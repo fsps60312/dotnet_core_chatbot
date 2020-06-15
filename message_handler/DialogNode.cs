@@ -19,6 +19,30 @@ namespace message_handler
         protected void Sleep(int miliseconds) { System.Threading.Thread.Sleep(miliseconds); }
         protected void Bug(string msg) { SendMsg("error:\n" + msg);EndDialog(new DialogEntry()); }
         protected bool IsChinese(char c) { return 0x4E00 <= c && c <= 0x9FFF; }
+        protected List<int>Range(int l,int r)
+        {
+            var ret = new List<int>();
+            for (int i = l; i < r; i++) ret.Add(i);
+            return ret;
+        }
+        protected List<int>Range(int n)
+        {
+            return Range(0, n);
+        }
+        protected List<T>Shuffled<T>(List<T>s)
+        {
+            var list = new List<T>(s);
+            int n = list.Count;
+            while (n > 1)
+            {
+                n--;
+                int k = RandInt(0, n);
+                T value = list[k];
+                list[k] = list[n];
+                list[n] = value;
+            }
+            return list;
+        }
         protected string Minimize(string s)
         {
             s = new string(s.Where(c => char.IsLetterOrDigit(c) || IsChinese(c)).ToArray()).ToLower();

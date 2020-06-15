@@ -13,6 +13,7 @@ namespace message_handler
             new UrlReactor().Run();
             new WolframAlpha().Run();
             new Bash().Run();
+            new 幾A幾B().Run();
             new StatelessDialog().Run();
             FinalDialog.Read().Run();
         }
