@@ -50,7 +50,7 @@ namespace message_handler
                 }
                 EndDialog(Program.NextDialog);
             }
-            if(sender_msg.Trim()=="笑一個")
+            if (Minimize(sender_msg) == "笑一個")
             {
                 SendMsg(Bash.Cmd("bash", "curl facemood.grtimed.com 2>/dev/null | grep -A 2 '<div class=\"logo\">' | tail -1 | sed 's/<\\/div>//g' | sed -e 's/^[[:space:]]*//g' -e 's/[[:space:]]*$//g'"));
                 EndDialog(Program.NextDialog);
