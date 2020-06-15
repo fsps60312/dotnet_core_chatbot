@@ -16,7 +16,14 @@ namespace message_handler
             {
                 var opts = sender_msg.Trim().Split('\n').ToList();
                 opts.RemoveAt(opts.Count - 1);
-                if (opts.Count == 0) SendMsg("選項呢？");
+                if (opts.Count == 0)
+                {
+                    SendMsg("選項呢？");
+                    Sleep(1000);
+                    SendMsg("範例：");
+                    Sleep(2000);
+                    SendMsg("黑桃\n紅心\n方塊\n梅花\n選一個");
+                }
                 else
                 {
                     SendMsg("我選：");
