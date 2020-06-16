@@ -38,7 +38,7 @@ namespace message_handler
                 if (process.HasExited)
                 {
                     string res = process.StandardOutput.ReadToEnd() + process.StandardError.ReadToEnd();
-                    return string.IsNullOrWhiteSpace(res) ? "Oops, no output." : res;
+                    return string.IsNullOrWhiteSpace(res) ? "👻" : res;
                 }
             }
         }
