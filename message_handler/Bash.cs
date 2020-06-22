@@ -7,7 +7,7 @@ namespace message_handler
 {
     class Bash : DialogNode
     {
-        public static string Cmd(string cmd, string input)
+        public static string Cmd(string cmd, string input, double time_limit = 3.0)
         {
             var process = new Process()
             {
@@ -29,11 +29,11 @@ namespace message_handler
             while (true)
             {
                 System.Threading.Thread.Sleep(100);
-                if ((DateTime.Now - start_time).TotalSeconds > 3)
+                if ((DateTime.Now - start_time).TotalSeconds > time_limit)
                 {
                     //SendMsg($"{process.Id} {process.SessionId}");
                     process.Kill(true);
-                    return "超過3秒囉，卡";
+                    return $"超過{time_limit}秒囉，卡";
                 }
                 if (process.HasExited)
                 {
@@ -56,7 +56,8 @@ namespace message_handler
                 (new[]{"toilet"},"toilet"),
                 (new[]{"rev"},"rev"),
                 (new[]{"moo"},"\"apt moo\""),
-                (new[]{"rig"},"rig")
+                (new[]{"rig"},"rig"),
+                (new[]{"rolldice"},"rolldice")
             })
             {
                 string input = null;

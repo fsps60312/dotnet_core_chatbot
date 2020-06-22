@@ -52,7 +52,8 @@ namespace message_handler
             }
             if (Minimize(sender_msg) == "笑一個")
             {
-                SendMsg(Bash.Cmd("bash", "curl facemood.grtimed.com 2>/dev/null | grep -A 2 '<div class=\"logo\">' | tail -1 | sed 's/<\\/div>//g' | sed -e 's/^[[:space:]]*//g' -e 's/[[:space:]]*$//g'"));
+                SendMsg(Bash.Cmd("bash", "curl facemood.grtimed.com 2>/dev/null | grep -A 2 '<div class=\"logo\">' | tail -1 | sed 's/<\\/div>//g' | sed -e 's/^[[:space:]]*//g' -e 's/[[:space:]]*$//g'"
+                    , 5));
                 EndDialog(Program.NextDialog);
             }
         }
