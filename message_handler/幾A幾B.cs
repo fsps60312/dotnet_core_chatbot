@@ -48,11 +48,13 @@ namespace message_handler
                 Sleep(3000);
                 SendMsg("更多介紹可參考：https://zh.wikipedia.org/wiki/猜数字");
                 EndDialog(this);
-            } else if (sender_msg == "退出")
+            }
+            else if (sender_msg == "退出")
             {
                 SendMsg("掰掰~");
                 EndDialog(new DialogEntry());
-            } else if (sender_msg == "範例")
+            }
+            else if (sender_msg == "範例")
             {
                 SendMsg(give_example());
                 Sleep(3000);
@@ -83,7 +85,8 @@ namespace message_handler
                     Sleep(3000);
                     SendButtons("意猶未盡？", "輸入幾A幾B再挑戰一次！", new[] { "幾A幾B" });
                     EndDialog(new DialogEntry());
-                }else
+                }
+                else
                 {
                     (int a, int b) = hint(answer, guess);
                     SendMsg($"{a}A{b}B");
@@ -103,7 +106,7 @@ namespace message_handler
             switch (stage)
             {
                 case Stage.Run:
-                    if (sender_msg.Trim() != "幾A幾B") return;
+                    if (sender_msg.Trim().ToUpper() != "幾A幾B" && sender_msg.Trim() != "猜數字") return;
                     answer = gen();
                     SendButtons("請輸入4位數開始遊戲", $"謎底是不重複的4位數，例如{gen()}", new[] { "規則", "範例", "退出" });
                     stage = Stage.Stage1;
