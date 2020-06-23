@@ -67,8 +67,11 @@ namespace message_handler
                 }
                 url = url.Remove(url.IndexOf('?'));
             }
-            const string pcPre = "https://www.facebook.com/CodingSimplifyLife/posts/";
-            if (url.StartsWith(pcPre)) return url.Substring(pcPre.Length);
+            url = url.TrimEnd('/');
+            foreach (string pcPre in new[] { "https://www.facebook.com/CodingSimplifyLife/posts/", "https://www.facebook.com/1848324468771150/posts/" })
+            {
+                if (url.StartsWith(pcPre)) return url.Substring(pcPre.Length);
+            }
             if (url == "https://m.facebook.com/story.php" && args.ContainsKey("story_fbid") && args.ContainsKey("id") && args["id"] == "1848324468771150")
             {
                 return args["story_fbid"];
